@@ -10,10 +10,31 @@ module.exports.movieTrend = function(title, releaseDate, relativeStartMonths = 6
 		startTime: moment(releaseDate).add(relativeEndMonths,'months').toDate(),
 		endTime: moment(releaseDate).add(relativeStartMonths,'months').toDate()
 	}
+
+	// .then(data => {
+	// 	module.exports.convertToRelative(data, releaseDate)
+	// 	return data;
+	// })
 	return googleTrends.interestOverTime(options);
 }
 
-module.exports.convertToRelative = function () {return }
+module.exports.convertToRelative = function (data, releaseDate) {
+	try {
+		data = JSON.parse(data);
+	} catch (err) {
+		return data;
+	}
+	var timeline = data.default.timelineData;
+
+	var middle = Math.ceil(timeline.length/2);
+	var timeline = timeline.map ((datapoint, index) => {
+			datapoint.formattedAxisTimeRelative = index - middle;
+			return datapoint;
+		})
+	return data;
+}
+
+
 // argument: options object
 // returns a promise with a JSON string resultd
 // options has form:
