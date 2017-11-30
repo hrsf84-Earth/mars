@@ -10,7 +10,7 @@ class LocationSentiment extends React.Component {
 
     this.state = {
       latitude: null || props.latitude,
-      longitude: null || -122.5078117,
+      longitude: null || props.longitude,
       emotion: null || props.emotion
     };
 
@@ -18,6 +18,16 @@ class LocationSentiment extends React.Component {
 
   render() {
     const { emotion } = this.props;
+    // const sadness = emotion.sadness * 100;
+    // const joy = emotion.joy * 100;
+    // const fear = emotion.fear * 100;
+    // const disgust = emotion.disgust * 100;
+    // const anger = emotion.anger * 100;
+    // const isHappy = joy >= sadness &&
+    //   joy >= fear &&
+    //   joy >= disgust &&
+    //   joy >= anger;
+    // const emotions = Object.entries(emotion);
 
     return (
       <div>

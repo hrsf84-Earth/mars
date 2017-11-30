@@ -87,16 +87,20 @@ app.get('/movie/:tmdbId', async (req, res) => {
 app.get('/movie/:tmdbId/:lat/:long', async (req, res) => {
   const { tmdbId, lat, long } = req.params;
 
+  console.log('inside the lat long');
   try {
     const movie = await Movie.findOne({ tmdbId });
     if (movie) {
       const emotion = await avgLocationEmotion(movie.title, lat, long);
+      console.log(emotion);
+
       const results = movie.toObject();
 
       results.emotion = emotion;
       return res.send(results);
     }
   } catch (err) {
+    console.log(err);
     return res.status(400).send(err);
   }
 });
