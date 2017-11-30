@@ -16,6 +16,8 @@ function Location(props) {
      <LocationSentiment
         latitude={props.latitude}
         longitude={props.longitude}
+        emotion={props.primaryMovie.emotion}
+        movie={props.primaryMovie}
       />
     </Paper>
   );
@@ -23,11 +25,14 @@ function Location(props) {
 
 Location.propTypes = {
   latitude: PropTypes.number,
-  longitude: PropTypes.number
+  longitude: PropTypes.number,
+  primaryMovie: PropTypes.shape({
+    emotion: PropTypes.shape({})
+  })
 };
 
-function mapSentimentToProps({ latitude, longitude }) {
-  return { latitude, longitude };
+function mapSentimentToProps({ latitude, longitude, primaryMovie }) {
+  return { latitude, longitude, primaryMovie };
 }
 
 export default connect(mapSentimentToProps)(Location);

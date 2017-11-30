@@ -2,6 +2,7 @@ const express = require('express');
 const tmdb = require('./utils/tmdb');
 const { movieTrend, convertToRelative } = require('./utils/trendFetch');
 const { avgTweetEmotion } = require('./utils/twitterEmotion');
+const { avgLocationEmotion } = require('./utils/twitterLocation');
 const Movie = require('./db/Movie');
 const walmart = require('./utils/walmart.js');
 
@@ -79,6 +80,23 @@ app.get('/movie/:tmdbId', async (req, res) => {
     return res.send(results);
   } catch (err) {
     console.log('response Error', err)
+    return res.status(400).send(err);
+  }
+});
+
+app.get('/movie/:tmdbId/:lat/:long', async (req, res) => {
+  const { tmdbId, lat, long } = req.params;
+
+  try {
+    const movie = await Movie.findOne({ tmdbId });
+    if (movie) {
+      const emotion = await avgLocationEmotion(movie.title, lat, long);
+      const results = movie.toObject();
+
+      results.emotion = emotion;
+      return res.send(results);
+    }
+  } catch (err) {
     return res.status(400).send(err);
   }
 });
