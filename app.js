@@ -57,15 +57,9 @@ app.get('/movie/:tmdbId', async (req, res) => {
       await movieTrend(results.title, results.releaseDate),
       await avgTweetEmotion(results.title),
     ];
-    // console.log('google trends data', smData[0])
     const trendData = convertToRelative(smData[0], results.releaseDate);
-    // const emotion = smData[1];
-    const emotion = smData[1]
+    const emotion = smData[1];
 
-
-
-    // const { timelineData } = JSON.parse(trendData).default;
-    // console.log('sfs', trendData)
     const { timelineData } = trendData.default;
     results.trendData = timelineData.map((trend) => {
       let { formattedAxisTime, formattedAxisTimeRelative } = trend;
@@ -76,7 +70,6 @@ app.get('/movie/:tmdbId', async (req, res) => {
         value: (trend.value[0] / trend.value[1]) * 100,
       };
     });
-    // console.log('trendData', results.trendData)
 
     //save to db
     const movieDoc = new Movie(results);
