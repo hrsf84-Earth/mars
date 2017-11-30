@@ -10,6 +10,11 @@ module.exports.movieTrend = function(title, releaseDate, relativeStartMonths = 6
 		startTime: moment(releaseDate).add(relativeEndMonths,'months').toDate(),
 		endTime: moment(releaseDate).add(relativeStartMonths,'months').toDate()
 	}
+
+	// .then(data => {
+	// 	module.exports.convertToRelative(data, releaseDate)
+	// 	return data;
+	// })
 	return googleTrends.interestOverTime(options);
 }
 
