@@ -1,6 +1,6 @@
 import { FETCH_MOVIE1, FETCH_MOVIE2 } from '../actions/MovieAction';
 
-function combineTwoLines(primaryGraph, secondaryGraph) {
+function combineTwoLines(primaryGraph, secondaryGraph, relative = false) {
   const dateToVol = new Map();
 
   primaryGraph.forEach((data) => {
@@ -10,10 +10,12 @@ function combineTwoLines(primaryGraph, secondaryGraph) {
   });
 
   secondaryGraph.forEach((data) => {
-    const { formattedAxisTime, value } = data;
-    const arr = dateToVol.get(formattedAxisTime) || [undefined];
+    const { formattedAxisTime, value, formattedAxisTimeRelative } = data;
+    const axisData = relative ? formattedAxisTimeRelative : formattedAxisTime;
+    // const arr = dateToVol.get(formattedAxisTime) || [undefined];
+    const arr = dateToVol.get(axisData) || [undefined];
     arr.push(value);
-    dateToVol.set(formattedAxisTime, arr);
+    dateToVol.set(axisData, arr);
   });
 
   const res = [];
@@ -38,17 +40,19 @@ function combineTwoLines(primaryGraph, secondaryGraph) {
   return res;
 }
 
-export default function (state = [], action) {
+export default function (state = [], action, relative = false) {
   switch (action.type) {
     case FETCH_MOVIE1:
+      let axisData = relative ? 'formattedAxisTimeRelative' : 'formattedAxisTime';
       return action.payload.data.trendData.map(data => (
         {
-          date: data.formattedAxisTime,
+          date: data[axisData],
+          // date: data.formattedAxisTime,
           primaryTrendVolume: data.value,
         }
       ));
     case FETCH_MOVIE2:
-      return combineTwoLines(state, action.payload.data.trendData);
+      return combineTwoLines(state, action.payload.data.trendData, relative);
     default:
       return state;
   }
