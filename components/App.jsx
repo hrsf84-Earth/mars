@@ -3,7 +3,11 @@ import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
 import SearchBox from '../containers/SearchBox';
 import MovieDetail from '../containers/MovieDetail';
+
 import Location from '../containers/Location';
+
+import Ads from '../containers/Ads.jsx';
+
 
 export default function App() {
   return (
@@ -14,7 +18,14 @@ export default function App() {
       />
       <SearchBox />
       <MovieDetail />
+
       <Location />
+
+      <Ads />
+
     </Paper>
   );
 }
+
+
+     

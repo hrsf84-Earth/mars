@@ -3,6 +3,7 @@ const tmdb = require('./utils/tmdb');
 const { movieTrend } = require('./utils/trendFetch');
 const { avgTweetEmotion } = require('./utils/twitterEmotion');
 const Movie = require('./db/Movie');
+const walmart = require('./utils/walmart.js');
 
 const app = express();
 
@@ -16,7 +17,12 @@ app.get('/', (req, res) => {
 
 app.get('/search/:movie', (req, res) => {
   tmdb.searchMoviesByName(req.params.movie).then((data) => {
-    res.send(data);
+    walmart.searchProductsByMovieName(req.params.movie)
+    .then((ads) => {
+
+      // console.log('server movie search: ', ads)
+      res.send([data, ads]);
+    })
   });
 });
 

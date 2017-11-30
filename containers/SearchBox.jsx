@@ -9,7 +9,7 @@ import { cyan100 } from 'material-ui/styles/colors';
 import axios from 'axios';
 import SearchBar from '../components/SearchBar';
 import MovieList from '../components/MovieList';
-import { fetchMovie1, fetchMovie2 } from '../actions/MovieAction';
+import { fetchMovie1, fetchMovie2, fetchProducts } from '../actions/MovieAction';
 
 class SearchBox extends Component {
   constructor() {
@@ -18,6 +18,7 @@ class SearchBox extends Component {
     this.state = {
       primaryMovieList: [],
       secondaryMovieList: [],
+      walmartProducts: [],
     };
 
     this.style = {
@@ -30,13 +31,18 @@ class SearchBox extends Component {
     this.onMovieSearch = this.onMovieSearch.bind(this);
     this.fetchPrimaryMovie = this.fetchPrimaryMovie.bind(this);
     this.fetchSecondaryMovie = this.fetchSecondaryMovie.bind(this);
+    this.retrieveProducts = this.retrieveProducts.bind(this);
   }
 
   onMovieSearch(query, type) {
     axios.get(`/search/${query}`)
       .then((response) => {
-        if (type === 'primary') this.setState({ primaryMovieList: response.data.results });
-        else if (type === 'secondary') this.setState({ secondaryMovieList: response.data.results });
+        // get search back from walmart
+        console.log('response from movieSearch in Sbox: ', response.data[1].items)
+        this.retrieveProducts(response.data[1].items)
+        // this.setState({ walmartProducts: response.data[1].items })
+        if (type === 'primary') this.setState({ primaryMovieList: response.data[0].results });
+        else if (type === 'secondary') this.setState({ secondaryMovieList: response.data[0].results });
       })
       .catch(err => console.error(err));
   }
@@ -51,10 +57,15 @@ class SearchBox extends Component {
     this.props.fetchMovie2(id);
   }
 
+  retrieveProducts(movieData) {
+    this.setState({ walmartProducts: [] });
+    this.props.fetchProducts(movieData);
+  }
+
   render() {
     const hasPrimaryMovieList = this.state.primaryMovieList.length > 0;
     const hasSecondaryMovieList = this.state.secondaryMovieList.length > 0;
-    const { primaryMovie, secondaryMovie } = this.props;
+    const { primaryMovie, secondaryMovie, walmartProduct } = this.props;
     return (
       <Paper zDepth={2} style={this.style}>
         <SearchBar
@@ -105,13 +116,13 @@ SearchBox.propTypes = {
     images: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };
-
-function mapStateToProps({ primaryMovie, secondaryMovie }) {
-  return { primaryMovie, secondaryMovie };
+//state
+function mapStateToProps({ primaryMovie, secondaryMovie, walmartProducts }) {
+  return { primaryMovie, secondaryMovie, walmartProducts };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchMovie1, fetchMovie2 }, dispatch);
+  return bindActionCreators({ fetchMovie1, fetchMovie2, fetchProducts }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);
