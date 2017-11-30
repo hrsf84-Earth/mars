@@ -1,7 +1,7 @@
 import { FETCH_MOVIE1, FETCH_MOVIE2 } from '../actions/MovieAction';
 
 function combineTwoLines(primaryGraph, secondaryGraph, relative = false) {
-  const dateToVol = new Map();
+  const dateToVol = new Map(); //object with array of key value pairs [ ['one',1], ['two', 1] ]
 
   primaryGraph.forEach((data) => {
     const { date, primaryTrendVolume } = data;
@@ -33,21 +33,20 @@ function combineTwoLines(primaryGraph, secondaryGraph, relative = false) {
     });
     entry = mapIter.next().value;
   }
-
+  // console.log ('res', res)
   res.sort((a, b) => (new Date(a.date) <= new Date(b.date) ? -1 : 1));
   // console.log(res);
 
   return res;
 }
 
-export default function (state = [], action, relative = false) {
+export default function (state = [], action, relative = true) {
   switch (action.type) {
     case FETCH_MOVIE1:
       let axisData = relative ? 'formattedAxisTimeRelative' : 'formattedAxisTime';
       return action.payload.data.trendData.map(data => (
         {
           date: data[axisData],
-          // date: data.formattedAxisTime,
           primaryTrendVolume: data.value,
         }
       ));
