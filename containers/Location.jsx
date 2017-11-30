@@ -6,13 +6,14 @@ import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
 import Paper from 'material-ui/Paper';
 import { cyan100 } from 'material-ui/styles/colors';
+import LocationSentiment from '../components/LocationSentiment';
 
 const style = { padding: '35px' };
 
 function Location(props) {
   return (
     <Paper zDepth={1} style={style}>
-     Location
+     <LocationSentiment
         latitude={props.latitude}
         longitude={props.longitude}
       />
@@ -21,8 +22,8 @@ function Location(props) {
 }
 
 Location.propTypes = {
-  latitude: PropTypes.shape({}).isRequired,
-  longitude: PropTypes.shape({}).isRequired
+  latitude: PropTypes.number,
+  longitude: PropTypes.number
 };
 
 function mapSentimentToProps({ latitude, longitude }) {
