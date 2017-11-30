@@ -43,18 +43,25 @@ function combineTwoLines(primaryGraph, secondaryGraph, relative = false) {
   return res;
 }
 
+<<<<<<< f4630107742bc802ff8fe223bd21f80cdc518ce6
 function retrieveRelative () {
 
 }
 
+=======
+>>>>>>> Minor changes
 export default function (state = [], action, relative = true) {
   switch (action.type) {
     case FETCH_MOVIE1:
       // let axisData = relative ? 'formattedAxisTimeRelative' : 'formattedAxisTime';
       return action.payload.data.trendData.map(data => (
         {
+<<<<<<< f4630107742bc802ff8fe223bd21f80cdc518ce6
           date: data['formattedAxisTime'],
           dateRelative: data['formattedAxisTimeRelative'],
+=======
+          date: data[axisData],
+>>>>>>> Minor changes
           primaryTrendVolume: data.value,
         }
       ));
