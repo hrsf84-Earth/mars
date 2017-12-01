@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   secondaryMovie: SecondaryMovieReducer,
   graphData: GraphDataReducer,
   walmartProducts: walmartProductsReducer,
-  mainView: changeViewReducer
+  mainView: changeViewReducer,
   locationSentiment: locationSentiment
 });
 
