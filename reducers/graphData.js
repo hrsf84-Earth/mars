@@ -2,8 +2,8 @@ import { FETCH_MOVIE1, FETCH_MOVIE2 } from '../actions/MovieAction';
 import Store from '../public/index.jsx'
 // import { CHANGE_GRAPH } from '../actions/GraphAction';
 
-function combineTwoLines(primaryGraph, secondaryGraph, relative = false) {
-  // console.log('store state', Store.getState())
+export function combineTwoLines(primaryGraph, secondaryGraph, relative = false) {
+  console.log('store state', Store.getState())
   const dateToVol = new Map(); //object with array of key value pairs [ ['one',1], ['two', 1] ]
 
   primaryGraph.forEach((data) => {
@@ -38,7 +38,7 @@ function combineTwoLines(primaryGraph, secondaryGraph, relative = false) {
   }
   // console.log ('res', res)
   res.sort((a, b) => (new Date(a.date) <= new Date(b.date) ? -1 : 1));
-  // console.log(res);
+  // console.log('res', res);
 
   return res;
 }
