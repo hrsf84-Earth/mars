@@ -11,14 +11,11 @@ import LocationSentiment from '../components/LocationSentiment';
 const style = { padding: '35px' };
 
 function Location(props) {
-  // const { store } = this.context;
   return (
     <Paper zDepth={1} style={style}>
      <LocationSentiment
         latitude={props.latitude}
         longitude={props.longitude}
-        primaryMovie={props.primaryMovie}
-        emotion={props.primaryMovie.emotion}
       />
     </Paper>
   );
@@ -26,14 +23,11 @@ function Location(props) {
 
 Location.propTypes = {
   latitude: PropTypes.number,
-  longitude: PropTypes.number,
-  primaryMovie: PropTypes.shape({
-    emotion: PropTypes.shape({})
-  })
+  longitude: PropTypes.number
 };
 
-function mapSentimentToProps({ latitude, longitude, primaryMovie, emotion }) {
-  return { latitude, longitude, primaryMovie, emotion };
+function mapSentimentToProps({ latitude, longitude }) {
+  return { latitude, longitude };
 }
 
 export default connect(mapSentimentToProps)(Location);

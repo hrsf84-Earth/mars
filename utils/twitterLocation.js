@@ -1,53 +1,26 @@
 const axios = require('axios');
-
-const twitterApiUrl = 'https://api.twitter.com/1.1/search/tweets.json';
-const twitterToken = process.env.TWITTERAPI;
-
-const watsonApiUrl = 'https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze';
-const watsonToken = process.env.WATSONAPI;
-
-const getEmotions = function (text, twitterSearchTerm) {
-  return axios.get(
-    watsonApiUrl,
-    {
-      params: {
-        version: '2017-02-27',
-        features: 'emotion',
-        targets: twitterSearchTerm,
-        text,
-      },
-      headers: {
-        Authorization: `Basic ${watsonToken}`,
-      },
-      timeout: 6000
-    },
-  )
-    .catch((err) => {
-      console.log(`error from watson API:  ${err}`);
-    }).then(Promise.resolve(false));
-};
-
+const Emotion = require('./twitterEmotion');
 
 module.exports.avgLocationEmotion = function (twitterSearchTerm, lat, long) {
-  let geocodeString = lat + ',' + long + ',' + '50mi'
+  let geocodeString =  '37.7578149' + ',' + '-122.5078117' + ',' + '50mi'
+  // let geocodeString = lat + ',' + long + ',' + '50mi'
   return axios.get(
-    twitterApiUrl,
+    Emotion.twitterApiUrl,
     {
       params: {
-        q: twitterSearchTerm,
-        geocode: geocodeString,
-        result_type: 'recent'
+        q: 'coco',
+        // q: twitterSearchTerm,
+        geocode: geocodeString
       },
       headers: {
-        Authorization: `Bearer ${twitterToken}`,
+        Authorization: `Bearer ${Emotion.twitterToken}`,
       },
     },
   )
     .then(res => res.data.statuses.map(status => status.text))
     .then((texts) => {
       const emotions = [];
-      texts.forEach(text => emotions.push(getEmotions(text)));
-      console.log('SENDING TEXTS TO WATSON');
+      texts.forEach(text => emotions.push(Emotion.getEmotions(text)));
       return Promise.all(emotions);
     })
     .then((emotions) => {
@@ -70,6 +43,6 @@ module.exports.avgLocationEmotion = function (twitterSearchTerm, lat, long) {
       return avgEmotion;
     })
     .catch((err) => {
-      console.log(`Error from Twitter API:  ${err}`);
+      console.log(`error from twitter api:  ${err}`);
     });
 };
