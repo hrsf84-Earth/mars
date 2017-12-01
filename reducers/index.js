@@ -4,15 +4,13 @@ import SecondaryMovieReducer from './secondaryMovie';
 import GraphDataReducer from './graphData';
 import walmartProductsReducer from './walmartProducts';
 import changeViewReducer from './mainView';
-import locationSentiment from './locationSentiment';
 
 const rootReducer = combineReducers({
   primaryMovie: PrimaryMovieReducer,
   secondaryMovie: SecondaryMovieReducer,
   graphData: GraphDataReducer,
   walmartProducts: walmartProductsReducer,
-  mainView: changeViewReducer,
-  locationSentiment: locationSentiment
+  mainView: changeViewReducer
 });
 
 export default rootReducer;

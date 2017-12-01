@@ -55,7 +55,9 @@ function MovieDetail(props) {
 
 MovieDetail.propTypes = {
   primaryMovie: PropTypes.shape({}).isRequired,
-  secondaryMovie: PropTypes.shape({}).isRequired
+  secondaryMovie: PropTypes.shape({}).isRequired,
+  latitude: PropTypes.number,
+  longitude: PropTypes.number
 };
 
 function mapStateToProps({ primaryMovie, secondaryMovie, latitude, longitude, mainView }) {

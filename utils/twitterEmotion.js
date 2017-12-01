@@ -25,16 +25,13 @@ const getEmotions = function (text) {
     }).then(Promise.resolve(false));
 };
 
-
-module.exports.avgTweetEmotion = function (twitterSearchTerm, lat=40.7127753, long=-74.0059728) {
-  let geocodeString = lat + ',' + long + ',' + '50mi'
+//  returns an object with emotion properties
+module.exports.avgTweetEmotion = function (twitterSearchTerm) {
   return axios.get(
     twitterApiUrl,
     {
       params: {
         q: twitterSearchTerm,
-        geocode: geocodeString,
-        result_type: 'recent'
       },
       headers: {
         Authorization: `Bearer ${twitterToken}`,
@@ -45,7 +42,6 @@ module.exports.avgTweetEmotion = function (twitterSearchTerm, lat=40.7127753, lo
     .then((texts) => {
       const emotions = [];
       texts.forEach(text => emotions.push(getEmotions(text)));
-      console.log('SENDING TEXTS TO WATSON', texts[0]);
       return Promise.all(emotions);
     })
     .then((emotions) => {
@@ -68,6 +64,6 @@ module.exports.avgTweetEmotion = function (twitterSearchTerm, lat=40.7127753, lo
       return avgEmotion;
     })
     .catch((err) => {
-      console.log(`Error from Twitter API:  ${err}`);
+      console.log(`error from twitter api:  ${err}`);
     });
 };
