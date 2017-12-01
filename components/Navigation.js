@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { graphAbsolute, graphRelative, map, twitter} from '../actions/switchView';
+import { graphAbsolute, graphRelative, movieDetails, map, locationSentiment} from '../actions/switchView';
 
 class Navigation extends React.Component {
   constructor() {
@@ -23,12 +23,16 @@ class Navigation extends React.Component {
         this.props.graphRelative();
         break;
       }
+      case 'navBtnMovieDetails': {
+        this.props.movieDetails();
+        break;
+      }
       case 'navBtnMap': {
         this.props.map();
         break;
       }
-      case 'navBtnMap': {
-        this.props.twitter();
+      case 'navBtnTwitter': {
+        this.props.locationSentiment();
         break;
       }
     }
@@ -39,6 +43,7 @@ class Navigation extends React.Component {
       <div>
       <button id='navBtnGraph' onClick={(evt) => this.navButtonClick(evt)} >Graph</button>
       <button id='navBtnGraphRelative' onClick={(evt) => this.navButtonClick(evt)} >Relative</button>
+      <button id='navBtnMovieDetails' onClick={(evt) => this.navButtonClick(evt)} >MovieDetails</button>
       <button id='navBtnMap' onClick={(evt) => this.navButtonClick(evt)} >Map</button>
       <button id='navBtnTwitter' onClick={(evt) => this.navButtonClick(evt)} >Twitter</button>
     </div>
@@ -46,19 +51,12 @@ class Navigation extends React.Component {
   }
 }
 
-
-// Navigation.propTypes = {
-//   navButtonClick: PropTypes.func.isRequired,
-// }
-
-//state
 function mapStateToProps({ mainView }) {
   return { mainView };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ graphAbsolute, graphRelative, map, twitter }, dispatch);
+  return bindActionCreators({ graphAbsolute, graphRelative, movieDetails, map, locationSentiment }, dispatch);
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

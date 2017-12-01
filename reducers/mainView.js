@@ -10,12 +10,16 @@ export default function (state = {}, action ) {
       return {mainView: 'graphRelative'}
       break;
     }
+    case 'MOVIEDETAILS': {
+      return {mainView: 'movieDetails'}
+      break;
+    }
     case 'MAP': {
       return {mainView: 'map'}
       break;
     }
-    case 'TWITTER': {
-      return {mainView: 'twitter'}
+    case 'LOCATIONSENTIMENT': {
+      return {mainView: 'locationSentiment'}
       break;
     }
     default: {
