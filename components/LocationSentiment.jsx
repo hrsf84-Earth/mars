@@ -20,9 +20,11 @@ class LocationSentiment extends React.Component {
     const { emotion } = this.props;
     let view;
 
+    // If emotion object exists, render the graph.
+    // Hardcode all null or invalid values to zero
     if (emotion) {
       const emotions = Object.keys(emotion).map(key => {
-          return { 'name': [key], 'Sentiment Index': emotion[key] ? emotion[key] * 100 : .5 }
+          return { 'name': [key], 'Sentiment Index': emotion[key] ? emotion[key] * 100 : 0 }
       });
 
       view = (
@@ -36,7 +38,7 @@ class LocationSentiment extends React.Component {
               <YAxis label={{ value: 'Sentiment Index', angle: -90, position: 'insideLeft' }} />
               <Tooltip />
               <Legend verticalAlign="top" />
-              <Bar dataKey="Sentiment Index" fill="#8884d8" />
+              <Bar dataKey="Sentiment Index" fill="#f44336" />
             </BarChart>
           </div>
         </div>

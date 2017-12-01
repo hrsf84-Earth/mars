@@ -11,10 +11,10 @@ import LocationSentiment from '../components/LocationSentiment';
 const style = { padding: '35px' };
 
 function Location(props) {
-  // const { store } = this.context;
   return (
     <Paper zDepth={1} style={style}>
      <LocationSentiment
+        // passing latitue and longitude for potential feature for displaying location on the final rendered graph
         latitude={props.latitude}
         longitude={props.longitude}
         primaryMovie={props.primaryMovie}

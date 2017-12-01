@@ -21,7 +21,6 @@ app.get('/search/:movie', (req, res) => {
   tmdb.searchMoviesByName(req.params.movie).then((data) => {
     walmart.searchProductsByMovieName(req.params.movie)
     .then((ads) => {
-      // console.log('server movie search: ', ads)
       res.send([data, ads]);
     })
   });
@@ -84,6 +83,7 @@ app.get('/movie/:tmdbId', async (req, res) => {
   }
 });
 
+// Route to pass lat/long info for localized sentiment reaction
 app.get('/movie/:tmdbId/:lat/:long', async (req, res) => {
   const { tmdbId, lat, long } = req.params;
 
