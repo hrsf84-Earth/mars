@@ -1,7 +1,8 @@
 export const GRAPHABSOLUTE = 'GRAPHABSOLUTE';
 export const GRAPHRELATIVE = 'GRAPHRELATIVE';
+export const MOVIEDETAILS ='MOVIEDETAILS';
 export const MAP ='MAP';
-export const TWITTER ='TWITTER';
+export const LOCATIONSENTIMENT ='LOCATIONSENTIMENT';
 
 
 export function graphAbsolute () {
@@ -12,12 +13,19 @@ export function graphAbsolute () {
   }
 }
 
-
 export function graphRelative () {
   console.log('graphRelative')
   return {
     type: GRAPHRELATIVE,
     view: 'graphRelative'
+  }
+}
+
+export function movieDetails () {
+  console.log('movieDetails')
+  return {
+    type: MOVIEDETAILS,
+    view: 'movieDetails'
   }
 }
 
@@ -29,10 +37,10 @@ export function map () {
   }
 }
 
-export function twitter () {
-  console.log('twitter')
+export function locationSentiment () {
+  console.log('locationSentiment')
   return {
-    type: TWITTER,
-    view: 'twitter'
+    type: LOCATIONSENTIMENT,
+    view: 'locationSentiment'
   }
 }

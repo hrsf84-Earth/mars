@@ -16,21 +16,29 @@ function MovieDetail(props) {
   var returnDom;
   console.log('props', mainView)
   if (mainView === 'graphAbsolute') {
-    var returnDom =
+    returnDom =
       <Graph
         primaryMovie={props.primaryMovie}
         secondaryMovie={props.secondaryMovie}
       />
   } else if (mainView === 'graphRelative') {
-    var returnDom =
+    returnDom =
       <Graph
         primaryMovie={props.primaryMovie}
         secondaryMovie={props.secondaryMovie}
       />
+  } else if (mainView === 'movieDetails') {
+    returnDom =
+     <MovieInfo
+        primaryMovie={props.primaryMovie}
+        secondaryMovie={props.secondaryMovie}
+      />
   } else if (mainView === 'map') {
-    var returnDom = null;
+    returnDom = null;
+  } else if (mainView === 'locationSentiment') {
+    returnDom = null;
   } else {
-    var returnDom = <Graph
+    returnDom = <Graph
     primaryMovie={props.primaryMovie}
     secondaryMovie={props.secondaryMovie}
   />
@@ -45,10 +53,6 @@ function MovieDetail(props) {
       <Navigation
       />
       {returnDom}
-      <MovieInfo
-        primaryMovie={props.primaryMovie}
-        secondaryMovie={props.secondaryMovie}
-      />
     </Paper>
   );
 }

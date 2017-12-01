@@ -46,7 +46,7 @@ class LocationSentiment extends React.Component {
     }
 
     return (
-       <div>Emotions: {view}</div>
+       <div>Local Sentiment: {view}</div>
     );
   }
 }
