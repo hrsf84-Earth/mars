@@ -23,6 +23,7 @@ const movieSchema = new mongoose.Schema({
   releaseDate: Date,
   trendData: [{
     formattedAxisTime: String,
+    formattedAxisTimeRelative: Number,
     value: Number,
   }],
 });

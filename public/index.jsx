@@ -8,12 +8,14 @@ import App from '../components/App';
 import reducers from '../reducers';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
-
+const Store = createStoreWithMiddleware(reducers, {mainView: 'graphAbsolute'})
 ReactDOM.render(
   <MuiThemeProvider>
-    <Provider store={createStoreWithMiddleware(reducers)}>
+    <Provider store={Store}>
       <App />
     </Provider>
   </MuiThemeProvider>,
   document.getElementById('app'),
 );
+
+export default Store

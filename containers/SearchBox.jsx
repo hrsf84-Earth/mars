@@ -38,7 +38,7 @@ class SearchBox extends Component {
     axios.get(`/search/${query}`)
       .then((response) => {
         // get search back from walmart
-        console.log('response from movieSearch in Sbox: ', response.data[1].items)
+        // console.log('response from movieSearch in Sbox: ', response.data[1].items)
         this.retrieveProducts(response.data[1].items)
         // this.setState({ walmartProducts: response.data[1].items })
         if (type === 'primary') this.setState({ primaryMovieList: response.data[0].results });
