@@ -1,6 +1,9 @@
 import { FETCH_MOVIE1, FETCH_MOVIE2 } from '../actions/MovieAction';
+import Store from '../public/index.jsx'
+import { CHANGE_GRAPH } from '../actions/GraphAction';
 
 function combineTwoLines(primaryGraph, secondaryGraph, relative = false) {
+  // console.log('store state', Store.getState())
   const dateToVol = new Map(); //object with array of key value pairs [ ['one',1], ['two', 1] ]
 
   primaryGraph.forEach((data) => {
@@ -40,13 +43,18 @@ function combineTwoLines(primaryGraph, secondaryGraph, relative = false) {
   return res;
 }
 
+function retrieveRelative () {
+
+}
+
 export default function (state = [], action, relative = true) {
   switch (action.type) {
     case FETCH_MOVIE1:
-      let axisData = relative ? 'formattedAxisTimeRelative' : 'formattedAxisTime';
+      // let axisData = relative ? 'formattedAxisTimeRelative' : 'formattedAxisTime';
       return action.payload.data.trendData.map(data => (
         {
-          date: data[axisData],
+          date: data['formattedAxisTime'],
+          dateRelative: data['formattedAxisTimeRelative'],
           primaryTrendVolume: data.value,
         }
       ));
