@@ -14,7 +14,7 @@ export default function App() {
     <Paper>
       <AppBar
         title="Cliff Movie DB"
-        iconElementLeft={<img src="https://s3.amazonaws.com/tt-public-assets/Cliff_icon.png" alt="Logo" />}
+        // iconElementLeft={<img src="https://s3.amazonaws.com/tt-public-assets/Cliff_icon.png" alt="Logo" />}
       />
       <SearchBox />
       <MovieDetail />
@@ -28,4 +28,4 @@ export default function App() {
 }
 
 
-     
+

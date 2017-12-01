@@ -12,7 +12,7 @@ import {
 
 function AdList(props) {
   let walmartData = props.product;
-  console.log('walmart data in adlist!: ', walmartData)
+  // console.log('walmart data in adlist!: ', walmartData)
   return (
   	<TableRow>
   		<TableRowColumn>
