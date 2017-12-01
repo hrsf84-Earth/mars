@@ -9,6 +9,7 @@ import reducers from '../reducers';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 const Store = createStoreWithMiddleware(reducers, {mainView: 'graphAbsolute'})
+
 ReactDOM.render(
   <MuiThemeProvider>
     <Provider store={Store}>

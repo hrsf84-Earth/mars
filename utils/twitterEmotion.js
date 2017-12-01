@@ -6,6 +6,7 @@ const twitterToken = process.env.TWITTERAPI;
 const watsonApiUrl = 'https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze';
 const watsonToken = process.env.WATSONAPI;
 
+// getEmotions receives tweets and sends them to IBM Watson for processing sentiment analysis
 const getEmotions = function (text) {
   return axios.get(
     watsonApiUrl,
@@ -25,8 +26,9 @@ const getEmotions = function (text) {
     }).then(Promise.resolve(false));
 };
 
-//  returns an object with emotion properties
-module.exports.avgTweetEmotion = function (twitterSearchTerm) {
+// return an object with Emotion properties with a default lat/long for New York City
+module.exports.avgTweetEmotion = function (twitterSearchTerm, lat=40.7127753, long=-74.0059728) {
+  let geocodeString = lat + ',' + long + ',' + '50mi'
   return axios.get(
     twitterApiUrl,
     {

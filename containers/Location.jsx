@@ -14,6 +14,8 @@ function Location(props) {
   return (
     <Paper zDepth={1} style={style}>
      <LocationSentiment
+        // passing longitude and latitude, but we might want to rip it out
+        // I was thinking we could use them to display a location name on the chart later
         latitude={props.latitude}
         longitude={props.longitude}
       />
