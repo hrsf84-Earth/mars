@@ -25,13 +25,16 @@ const getEmotions = function (text) {
     }).then(Promise.resolve(false));
 };
 
-//  returns an object with emotion properties
-module.exports.avgTweetEmotion = function (twitterSearchTerm) {
+
+module.exports.avgTweetEmotion = function (twitterSearchTerm, lat=40.7127753, long=-74.0059728) {
+  let geocodeString = lat + ',' + long + ',' + '50mi'
   return axios.get(
     twitterApiUrl,
     {
       params: {
         q: twitterSearchTerm,
+        geocode: geocodeString,
+        result_type: 'recent'
       },
       headers: {
         Authorization: `Bearer ${twitterToken}`,
@@ -42,6 +45,7 @@ module.exports.avgTweetEmotion = function (twitterSearchTerm) {
     .then((texts) => {
       const emotions = [];
       texts.forEach(text => emotions.push(getEmotions(text)));
+      console.log('SENDING TEXTS TO WATSON', texts[0]);
       return Promise.all(emotions);
     })
     .then((emotions) => {
@@ -64,6 +68,50 @@ module.exports.avgTweetEmotion = function (twitterSearchTerm) {
       return avgEmotion;
     })
     .catch((err) => {
-      console.log(`error from twitter api:  ${err}`);
+      console.log(`Error from Twitter API:  ${err}`);
     });
 };
+
+
+//  returns an object with emotion properties
+// module.exports.avgTweetEmotion = function (twitterSearchTerm) {
+//   return axios.get(
+//     twitterApiUrl,
+//     {
+//       params: {
+//         q: twitterSearchTerm,
+//       },
+//       headers: {
+//         Authorization: `Bearer ${twitterToken}`,
+//       },
+//     },
+//   )
+//     .then(res => res.data.statuses.map(status => status.text))
+//     .then((texts) => {
+//       const emotions = [];
+//       texts.forEach(text => emotions.push(getEmotions(text)));
+//       return Promise.all(emotions);
+//     })
+//     .then((emotions) => {
+//       const avgEmotion = {
+//         sadness: 0, joy: 0, fear: 0, disgust: 0, anger: 0,
+//       };
+//       const props = Object.keys(avgEmotion);
+//       let emotionCount = 0;
+//       emotions.forEach((emotion) => {
+//         if (emotion) {
+//           for (let i = 0; i < props.length; i += 1) {
+//             avgEmotion[props[i]] += emotion.data.emotion.document.emotion[props[i]];
+//           }
+//           emotionCount += 1;
+//         }
+//       });
+//       for (let i = 0; i < props.length; i += 1) {
+//         avgEmotion[props[i]] /= emotionCount;
+//       }
+//       return avgEmotion;
+//     })
+//     .catch((err) => {
+//       console.log(`error from twitter api:  ${err}`);
+//     });
+// };

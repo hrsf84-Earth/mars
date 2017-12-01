@@ -16,11 +16,11 @@ app.get('/', (req, res) => {
   res.send('This is the landing page!');
 });
 
+
 app.get('/search/:movie', (req, res) => {
   tmdb.searchMoviesByName(req.params.movie).then((data) => {
     walmart.searchProductsByMovieName(req.params.movie)
     .then((ads) => {
-
       // console.log('server movie search: ', ads)
       res.send([data, ads]);
     })
