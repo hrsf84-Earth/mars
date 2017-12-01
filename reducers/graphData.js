@@ -1,6 +1,6 @@
 import { FETCH_MOVIE1, FETCH_MOVIE2 } from '../actions/MovieAction';
 import Store from '../public/index.jsx'
-import { CHANGE_GRAPH } from '../actions/GraphAction';
+// import { CHANGE_GRAPH } from '../actions/GraphAction';
 
 function combineTwoLines(primaryGraph, secondaryGraph, relative = false) {
   // console.log('store state', Store.getState())
