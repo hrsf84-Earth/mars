@@ -11,10 +11,6 @@ export default function (state = {}, action ) {
       break;
     }
     case 'MOVIEDETAILS': {
-      return {mainView: 'movieDetails'}
-      break;
-    }
-    case 'MOVIEDETAILS': {
       return 'movieDetails'
       break;
     }
