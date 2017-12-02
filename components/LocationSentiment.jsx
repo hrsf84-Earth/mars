@@ -54,7 +54,7 @@ class LocationSentiment extends React.Component {
             <BarChart width={1000} height={400} data={emotions}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
-              <YAxis label={{ value: 'Sentiment Index', angle: -90, position: 'outsideLeft' }} />
+              <YAxis label={{ value: 'Sentiment Index', angle: -90, position: 'insideLeft' }} />
               <Tooltip />
               <Legend verticalAlign="top" />
               <Bar dataKey={primaryTitle} fill="#f44336" />
@@ -66,7 +66,10 @@ class LocationSentiment extends React.Component {
     }
 
     return (
-       <div>Local Sentiment: {view}</div>
+      <div>
+        <h4>Current Local Sentiment</h4>
+        {view}
+      </div>
     );
   }
 }
