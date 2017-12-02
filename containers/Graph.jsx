@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Label, Tooltip, Legend } from 'recharts';
-import { combineTwoLines } from '../reducers/graphData'
+import { combineTwoLines, createTrends } from '../reducers/graphData'
+import Store from '../public/index.jsx'
 
 function Graph(props) {
   var data;
@@ -10,7 +11,10 @@ function Graph(props) {
   if (view === 'graphAbsolute') {
     data = props.graphData;
   } else if (view === 'graphRelative') {
+    // console.log('store state', Store.getState())
+    var store = Store.getState()
     // data  combineTwoLines(this.props.primaryGraph, this.props.secondaryGraph)
+    data = combineTwoLines(createTrends(store.primaryMovie.trendData), createTrends(store.secondaryMovie.trendData), true)
   }
   return (
     <div id="graph">
