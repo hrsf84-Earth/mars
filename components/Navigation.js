@@ -66,52 +66,53 @@ class Navigation extends React.Component {
     var view = this.props.mainView;
     return (
       <div>
-      <RaisedButton
-        id='navBtnGraph'
-        // onClick={(evt) => this.navButtonClick('navBtnGraph')}
-        onClick={this.graphButtonClick}
-        label="Graph"
-        primary={view === 'graphAbsolute' || view === 'graphRelative' ? true : false}
-      ></RaisedButton>
-      <Popover
-          open={this.state.isGraphMenuOpen}
-          anchorEl={this.state.anchorEl}
-          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-          targetOrigin={{horizontal: 'left', vertical: 'top'}}
-          onRequestClose={this.graphMenuClose}
-          autoCloseWhenOffScreen
-        >
-          <Menu>
-            <MenuItem primaryText="Absolute" onClick={(evt) => this.navButtonClick('navBtnGraph')} />
-            <MenuItem primaryText="Relative" onClick={(evt) => this.navButtonClick('navBtnGraphRelative')} />
-
-          </Menu>
-        </Popover>
-      {/* <RaisedButton
-        id='navBtnGraphRelative'
-        onClick={(evt) => this.navButtonClick('navBtnGraphRelative')}
-        label="Relative"
-        primary={view === 'graphRelative' ? true : false}
-      ></RaisedButton> */}
-      <RaisedButton
-        id='navBtnMovieDetails'
-        onClick={(evt) => this.navButtonClick('navBtnMovieDetails')}
-        label="Movie Details"
-        primary={view === 'movieDetails' ? true : false}
-      ></RaisedButton>
-      <RaisedButton
-        id='navBtnMap'
-        onClick={(evt) => this.navButtonClick('navBtnMap')}
-        label="Map"
-        primary={view === 'map' ? true : false}
-      ></RaisedButton>
-      <RaisedButton
-        id='navBtnTwitter'
-        onClick={(evt) => this.navButtonClick('navBtnTwitter')}
-        label="Twitter"
-        primary={view === 'locationSentiment' ? true : false}
-      ></RaisedButton>
-    </div>
+        <RaisedButton
+          id='navBtnGraph'
+          // onClick={(evt) => this.navButtonClick('navBtnGraph')}
+          onClick={this.graphButtonClick}
+          label="Graph"
+          primary={view === 'graphAbsolute' || view === 'graphRelative' ? true : false}
+        ></RaisedButton>
+        <Popover
+            open={this.state.isGraphMenuOpen}
+            anchorEl={this.state.anchorEl}
+            anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+            targetOrigin={{horizontal: 'left', vertical: 'top'}}
+            onRequestClose={this.graphMenuClose}
+            autoCloseWhenOffScreen
+            canAutoPosition={true}
+            animated={true}
+          >
+            <Menu>
+              <MenuItem primaryText="Sort by Date" onClick={(evt) => this.navButtonClick('navBtnGraph')} />
+              <MenuItem primaryText="Sort by Relative to Release Date" onClick={(evt) => this.navButtonClick('navBtnGraphRelative')} />
+            </Menu>
+          </Popover>
+        {/* <RaisedButton
+          id='navBtnGraphRelative'
+          onClick={(evt) => this.navButtonClick('navBtnGraphRelative')}
+          label="Relative"
+          primary={view === 'graphRelative' ? true : false}
+        ></RaisedButton> */}
+        <RaisedButton
+          id='navBtnMovieDetails'
+          onClick={(evt) => this.navButtonClick('navBtnMovieDetails')}
+          label="Movie Details"
+          primary={view === 'movieDetails' ? true : false}
+        ></RaisedButton>
+        <RaisedButton
+          id='navBtnMap'
+          onClick={(evt) => this.navButtonClick('navBtnMap')}
+          label="Map"
+          primary={view === 'map' ? true : false}
+        ></RaisedButton>
+        <RaisedButton
+          id='navBtnTwitter'
+          onClick={(evt) => this.navButtonClick('navBtnTwitter')}
+          label="Twitter"
+          primary={view === 'locationSentiment' ? true : false}
+        ></RaisedButton>
+      </div>
     )
   }
 }
