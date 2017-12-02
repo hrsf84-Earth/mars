@@ -23,7 +23,7 @@ export function fetchMovie2(id) {
 }
 
 export function fetchProducts(movieProducts) {
-  console.log('from actions products: ',movieProducts)
+  // console.log('from actions products: ',movieProducts)
   return {
     type: FETCH_PRODUCTS,
     payload: movieProducts,

@@ -3,11 +3,15 @@ import { MAINVIEW } from '../actions/switchView.js'
 export default function (state = {}, action ) {
   switch (action.type) {
     case 'GRAPHABSOLUTE': {
-      return {mainView: 'graphAbsolute'}
+      return 'graphAbsolute'
       break;
     }
     case 'GRAPHRELATIVE': {
-      return {mainView: 'graphRelative'}
+      return 'graphRelative'
+      break;
+    }
+    case 'MOVIEDETAILS': {
+      return {mainView: 'movieDetails'}
       break;
     }
     case 'MOVIEDETAILS': {
@@ -15,7 +19,7 @@ export default function (state = {}, action ) {
       break;
     }
     case 'MAP': {
-      return {mainView: 'map'}
+      return 'map'
       break;
     }
     case 'LOCATIONSENTIMENT': {
