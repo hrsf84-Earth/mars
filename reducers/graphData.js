@@ -18,7 +18,7 @@ export function combineTwoLines(primaryGraph, secondaryGraph, relative = false) 
     if (primaryTrendVolume) dateToVol.set(axisData, arr);
   });
 
-console.log(dateToVol)
+// console.log(dateToVol)
   secondaryGraph.forEach((data) => {
     const { date, primaryTrendVolume, dateRelative } = data;
     let secondaryTrendVolume = primaryTrendVolume;
@@ -28,7 +28,7 @@ console.log(dateToVol)
     arr.push(secondaryTrendVolume);
     dateToVol.set(axisData, arr);
   });
-  console.log(dateToVol)
+  // console.log(dateToVol)
 
   const results = [];
 

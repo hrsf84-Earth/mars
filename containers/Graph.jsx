@@ -13,8 +13,7 @@ function Graph(props) {
   } else if (view === 'graphRelative') {
     // console.log('store state', Store.getState())
     var store = Store.getState()
-    // data  combineTwoLines(this.props.primaryGraph, this.props.secondaryGraph)
-    console.log('store', store.secondaryMovie.title, store.secondaryMovie)
+    // console.log('store', store.secondaryMovie.title, store.secondaryMovie)
     if (store.secondaryMovie.title){
       data = combineTwoLines(createTrends(store.primaryMovie.trendData), createTrends(store.secondaryMovie.trendData), true)
     } else {
