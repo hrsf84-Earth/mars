@@ -6,6 +6,7 @@ import Title from '../components/Title';
 import Graph from './Graph';
 import MovieInfo from '../components/MovieInfo';
 import Navigation from '../components/Navigation';
+import Location from '../containers/Location';
 
 const style = { padding: '35px' };
 
@@ -14,7 +15,6 @@ import Store from '../public/index.jsx'
 function MovieDetail(props) {
   var mainView = props.mainView;
   var returnDom;
-  console.log('Movie Detail props', mainView)
   if (mainView === 'graphAbsolute') {
     returnDom =
       <Graph
@@ -36,7 +36,7 @@ function MovieDetail(props) {
   } else if (mainView === 'map') {
     returnDom = null;
   } else if (mainView === 'locationSentiment') {
-    returnDom = null;
+    returnDom = <Location />;
   } else {
     returnDom =
     <Graph
