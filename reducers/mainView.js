@@ -14,6 +14,10 @@ export default function (state = {}, action ) {
       return {mainView: 'movieDetails'}
       break;
     }
+    case 'MOVIEDETAILS': {
+      return {mainView: 'movieDetails'}
+      break;
+    }
     case 'MAP': {
       return 'map'
       break;
