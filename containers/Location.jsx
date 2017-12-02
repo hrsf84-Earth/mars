@@ -31,13 +31,13 @@ Location.propTypes = {
   longitude: PropTypes.number,
   primaryMovie: PropTypes.shape({
     emotion: PropTypes.shape({})
-  })
+  }),
   secondaryMovie: PropTypes.shape({
     emotion: PropTypes.shape({})
   })
 };
 
-function mapSentimentToProps({ latitude, longitude, primaryEmotion, secondaryMovie, secondaryEmotion }) {
+function mapSentimentToProps({ latitude, longitude, primaryMovie, primaryEmotion, secondaryMovie, secondaryEmotion }) {
   return { latitude, longitude, primaryMovie, primaryEmotion, secondaryMovie, secondaryEmotion };
 }
 

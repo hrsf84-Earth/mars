@@ -17,28 +17,48 @@ class LocationSentiment extends React.Component {
   }
 
   render() {
-    const { primaryEmotion, secondaryEmotion } = this.props;
+    const { primaryMovie, secondaryMovie, primaryEmotion, secondaryEmotion } = this.props;
     let view;
+    let primaryTitle = primaryMovie.title;
+    let secondaryTitle = secondaryMovie.title;
 
     // If emotion object exists, render the graph.
     // Hardcode all null or invalid values to zero
-    if (primaryEmotion) {
-      const emotions = Object.keys(primaryEmotion).map(key => {
-          return { 'name': [key], 'Sentiment Index': primaryEmotion[key] ? (primaryEmotion[key] * 100).toFixed(2) : 0 }
-      });
+    if (primaryMovie.emotion ) {
+      let emotions = [];
 
+      for (var k in primaryEmotion) {
+        let emotion = {};
+          emotion['name'] = k;
+          emotion[primaryTitle] = primaryEmotion[k] ? Math.round(primaryEmotion[k] * 100) : 0;
+        emotions.push(emotion);
+      }
+
+      // Conditional render for a second movie that is passed through
+      if (secondaryEmotion) {
+        for (var k in secondaryEmotion) {
+          emotions.forEach(function(element) {
+            if (k === element['name']) {
+              element[secondaryTitle] = secondaryEmotion[k] ? Math.round(secondaryEmotion[k] * 100) : 0;
+            }
+          });
+        }
+
+        var secondBar = (<Bar dataKey={secondaryTitle} fill="#b2ebf2" />);
+      }
+
+      // Conditional render for the first movie passed through
       view = (
         <div>
-          <div>Lat: {this.state.latitude}</div>
-          <div>Long: {this.state.longitude}</div>
           <div id="Sentiment">
             <BarChart width={1000} height={400} data={emotions}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
-              <YAxis label={{ value: 'Sentiment Index', angle: -90, position: 'insideLeft' }} />
+              <YAxis label={{ value: 'Sentiment Index', angle: -90, position: 'outsideLeft' }} />
               <Tooltip />
               <Legend verticalAlign="top" />
-              <Bar dataKey="Sentiment Index" fill="#f44336" />
+              <Bar dataKey={primaryTitle} fill="#f44336" />
+              {secondBar}
             </BarChart>
           </div>
         </div>
