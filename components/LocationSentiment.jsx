@@ -13,7 +13,6 @@ class LocationSentiment extends React.Component {
       latitude: this.props.latitude,
       longitude: this.props.longitude
     };
-
   }
 
   render() {

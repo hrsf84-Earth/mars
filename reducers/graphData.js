@@ -1,6 +1,10 @@
-import { FETCH_MOVIE1, FETCH_MOVIE2 } from '../actions/MovieAction';
+import { FETCH_MOVIE1, FETCH_MOVIE2, SET_GRAPH_TO_ABSOLUTE, SET_GRAPH_TO_RELATIVE } from '../actions/MovieAction';
 import Store from '../public/index.jsx'
 // import { CHANGE_GRAPH } from '../actions/GraphAction';
+var primaryGraphProcessedData;
+var secondaryGraphProcessedData;
+var combinedGraphData;
+var combinedGraphDataRelative;
 
 
 export function combineTwoLines(primaryGraph, secondaryGraph, relative = false) {
@@ -41,10 +45,7 @@ console.log(dateToVol)
     });
     entry = mapIter.next().value;
   }
-  // console.log ('res', res)
   results.sort((a, b) => (new Date(a.date) <= new Date(b.date) ? -1 : 1));
-  // console.log('res', res);
-
   return results;
 }
 
@@ -62,13 +63,36 @@ export function createTrends (data) {
 
 export default function (state = [], action) {
   switch (action.type) {
-    case FETCH_MOVIE1:
-      return createTrends(action.payload.data.trendData)
-
-    case FETCH_MOVIE2:
-      var movieTrends2 = createTrends(action.payload.data.trendData)
-      return combineTwoLines(state, movieTrends2);
-
+    case FETCH_MOVIE1: {
+      primaryGraphProcessedData = createTrends(action.payload.data.trendData);
+      return primaryGraphProcessedData;
+      break;
+    }
+    case FETCH_MOVIE2: {
+      secondaryGraphProcessedData = createTrends(action.payload.data.trendData);
+      combinedGraphData = combineTwoLines(primaryGraphProcessedData, secondaryGraphProcessedData, false);
+      return combinedGraphData;
+      break;
+    }
+    case SET_GRAPH_TO_ABSOLUTE: {
+      if (!secondaryGraphProcessedData) {
+        return primaryGraphProcessedData;
+      } else {
+        return combinedGraphData;
+      }
+      break;
+    }
+    case SET_GRAPH_TO_RELATIVE: {
+      if (primaryGraphProcessedData && secondaryGraphProcessedData) {
+        if (!combinedGraphDataRelative) {
+          combinedGraphDataRelative = combineTwoLines(primaryGraphProcessedData, secondaryGraphProcessedData, true);
+        }
+        return combinedGraphDataRelative;
+      } else {
+        return primaryGraphProcessedData
+      }
+      break;
+    }
     default:
       return state;
   }

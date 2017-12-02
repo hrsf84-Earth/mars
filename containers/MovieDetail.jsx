@@ -38,10 +38,11 @@ function MovieDetail(props) {
   } else if (mainView === 'locationSentiment') {
     returnDom = null;
   } else {
-    returnDom = <Graph
-    primaryMovie={props.primaryMovie}
-    secondaryMovie={props.secondaryMovie}
-  />
+    returnDom =
+    <Graph
+      primaryMovie={props.primaryMovie}
+      secondaryMovie={props.secondaryMovie}
+    />
   }
 
   return (

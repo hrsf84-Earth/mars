@@ -14,7 +14,12 @@ function Graph(props) {
     // console.log('store state', Store.getState())
     var store = Store.getState()
     // data  combineTwoLines(this.props.primaryGraph, this.props.secondaryGraph)
-    data = combineTwoLines(createTrends(store.primaryMovie.trendData), createTrends(store.secondaryMovie.trendData), true)
+    console.log('store', store.secondaryMovie.title, store.secondaryMovie)
+    if (store.secondaryMovie.title){
+      data = combineTwoLines(createTrends(store.primaryMovie.trendData), createTrends(store.secondaryMovie.trendData), true)
+    } else {
+      data = props.graphData;
+    }
   }
   return (
     <div id="graph">
@@ -22,8 +27,10 @@ function Graph(props) {
         <Line name={props.primaryMovie.title || ' '} type="monotone" dataKey="primaryTrendVolume" stroke="#8884d8" />
         <Line name={props.secondaryMovie.title || ' '} type="monotone" dataKey="secondaryTrendVolume" stroke="#FF0000" />
         <CartesianGrid stroke="#ccc" />
-        <XAxis dataKey="date">
-          <Label value="Date" offset={0} position="insideBottom" />
+        <XAxis dataKey={view === 'graphAbsolute'? 'date': 'dateRelative'}>
+          <Label value={view === 'graphAbsolute'? 'Date': '+/- week with zero at release date'} offset={0} position="insideBottom" />
+        {/* <XAxis dataKey="date">
+          <Label value={view === 'graphAbsolute'? 'Date': '+/- week with zero at release date'} offset={0} position="insideBottom" /> */}
         </XAxis>
         <YAxis label={{ value: 'Relative Search Volume', angle: -90, position: 'insideLeft' }} />
         <Tooltip />
