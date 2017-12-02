@@ -20,8 +20,8 @@ class Map extends React.Component {
 
   initializeMap() {
     this.map = new google.maps.Map(this.refs.map, {
-      zoom: 10,
-      center: {lat: 37.773972, lng: -122.431297}
+      zoom: 4,
+      center: {lat: 41.850033, lng: -87.6500523}
     });
   }
 
