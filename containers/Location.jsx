@@ -7,6 +7,7 @@ import Chip from 'material-ui/Chip';
 import Paper from 'material-ui/Paper';
 import { cyan100 } from 'material-ui/styles/colors';
 import LocationSentiment from '../components/LocationSentiment';
+import Map from '../components/map.jsx';
 
 const style = { padding: '35px' };
 
@@ -20,6 +21,7 @@ function Location(props) {
         primaryMovie={props.primaryMovie}
         emotion={props.primaryMovie.emotion}
       />
+      <Map />
     </Paper>
   );
 }
