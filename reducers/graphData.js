@@ -49,9 +49,6 @@ console.log(dateToVol)
 }
 
 
-function retrieveRelative () {
-}
-
 export function createTrends (data) {
   return data.map(data => (
     {
