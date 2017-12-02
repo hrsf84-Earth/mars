@@ -18,7 +18,7 @@ import {
 } from 'material-ui/Table';
 
 function Ads(props) {
-	console.log('props in ads.jsx: ', props.walmartProducts)
+	// console.log('props in ads.jsx: ', props.walmartProducts)
 	let oneAd = [];
 	if ( !Array.isArray(props.walmartProducts) ) {
 		oneAd = [];

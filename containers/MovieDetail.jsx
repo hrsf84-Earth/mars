@@ -12,9 +12,9 @@ const style = { padding: '35px' };
 import Store from '../public/index.jsx'
 
 function MovieDetail(props) {
-  var { mainView } = props.mainView;
+  var mainView = props.mainView;
   var returnDom;
-  console.log('props', mainView)
+  console.log('Movie Detail props', mainView)
   if (mainView === 'graphAbsolute') {
     returnDom =
       <Graph

@@ -2,11 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Label, Tooltip, Legend } from 'recharts';
+import { combineTwoLines, createTrends } from '../reducers/graphData'
+import Store from '../public/index.jsx'
 
 function Graph(props) {
+  var data;
+  var view = props.mainView;
+  if (view === 'graphAbsolute') {
+    data = props.graphData;
+  } else if (view === 'graphRelative') {
+    // console.log('store state', Store.getState())
+    var store = Store.getState()
+    // data  combineTwoLines(this.props.primaryGraph, this.props.secondaryGraph)
+    data = combineTwoLines(createTrends(store.primaryMovie.trendData), createTrends(store.secondaryMovie.trendData), true)
+  }
   return (
     <div id="graph">
-      <LineChart width={1000} height={400} data={props.graphData}>
+      <LineChart width={1000} height={400} data={data}>
         <Line name={props.primaryMovie.title || ' '} type="monotone" dataKey="primaryTrendVolume" stroke="#8884d8" />
         <Line name={props.secondaryMovie.title || ' '} type="monotone" dataKey="secondaryTrendVolume" stroke="#FF0000" />
         <CartesianGrid stroke="#ccc" />
@@ -31,8 +43,8 @@ Graph.propTypes = {
   }).isRequired,
 };
 
-function mapStateToProps({ graphData }) {
-  return { graphData };
+function mapStateToProps({ graphData, mainView }) {
+  return { graphData, mainView };
 }
 
 export default connect(mapStateToProps)(Graph);
