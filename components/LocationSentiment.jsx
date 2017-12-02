@@ -17,14 +17,14 @@ class LocationSentiment extends React.Component {
   }
 
   render() {
-    const { emotion } = this.props;
+    const { primaryEmotion, secondaryEmotion } = this.props;
     let view;
 
     // If emotion object exists, render the graph.
     // Hardcode all null or invalid values to zero
-    if (emotion) {
-      const emotions = Object.keys(emotion).map(key => {
-          return { 'name': [key], 'Sentiment Index': emotion[key] ? emotion[key] * 100 : 0 }
+    if (primaryEmotion) {
+      const emotions = Object.keys(primaryEmotion).map(key => {
+          return { 'name': [key], 'Sentiment Index': primaryEmotion[key] ? (primaryEmotion[key] * 100).toFixed(2) : 0 }
       });
 
       view = (

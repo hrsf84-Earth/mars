@@ -2,7 +2,7 @@
 
 ### Cliff on Mars
 
-An advanced movie database that gives passionate movie fans and studio executives easy access to movie data and social media stats of recent films.
+An advanced movie database that gives passionate movie fans and studio executives easy access to movie data and social media stats of recent films. To support local sentiment analysis, legacy sprint team added mapping and geocoded sentiment graphing and regraph Google Trends information relative to the release date of a film.
 
 ## Team and Areas of Responsibility
 
@@ -10,6 +10,10 @@ An advanced movie database that gives passionate movie fans and studio executive
   - Cliff: Documentation and testing
   - Hubert: TMDB API, server setup, Material UI, and React / Redux.
   - Tim: Recharts and database
+  - Jeff: Relative graphing
+  - Ted: Map component
+  - Carter: Ad component
+  - Janet: LocationSentiment component doing sentiment analysis by geocoded tweets and bar charting
 
 ## Table of Contents
 
@@ -35,6 +39,7 @@ Point your browser at cliffonmarsdb.herokuapp.com
 - Redux
 - Axios
 - Google Trends API (npm library)
+- Google Maps
 - Twitter API key
 - Watson API key
 - Material UI
@@ -57,7 +62,7 @@ npm install
 ### Setting up Development Server
 
 ```sh
-webpack && API_KEY=[YOUR TMDB API KEY] TWITTERAPI=[YOUR TWITTER API KEY] WATSONAPI=[YOUR WATSON API KEY] node app.js
+webpack && API_KEY=[YOUR TMDB API KEY] TWITTERAPI=[YOUR TWITTER API KEY] WATSONAPI=[YOUR WATSON API KEY] WALMARTAPI=[YOUR WALMART API KEY]node app.js
 ```
 
 ### Roadmap
