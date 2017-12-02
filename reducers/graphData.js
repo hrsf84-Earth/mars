@@ -49,6 +49,9 @@ console.log(dateToVol)
 }
 
 
+function retrieveRelative () {
+}
+
 export function createTrends (data) {
   return data.map(data => (
     {
@@ -64,9 +67,11 @@ export default function (state = [], action) {
   switch (action.type) {
     case FETCH_MOVIE1:
       return createTrends(action.payload.data.trendData)
+
     case FETCH_MOVIE2:
       var movieTrends2 = createTrends(action.payload.data.trendData)
       return combineTwoLines(state, movieTrends2);
+
     default:
       return state;
   }
