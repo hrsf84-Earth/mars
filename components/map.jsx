@@ -24,7 +24,7 @@ class Map extends React.Component {
     var chicago = {lat: 41.850033, lng: -87.6500523};
 
     var INITIAL_LOCATION = {
-      address: 'Chicago, Illinois',
+      address: 'San Francisco, CA',
       position: {
         lat: 37.773972,
         lng: -122.431297
@@ -51,7 +51,8 @@ class Map extends React.Component {
   onSearch(term, propType) {
     var context = this;
     this.geocoder.geocode({'address': term}, function handleResults(results, status){
-      console.log('THE GEOCODER RESULTS', results, status);
+      // console.log('THE GEOCODER RESULTS', results, status);
+      console.log(results[0].geometry.location.lat(), results[0].geometry.location.lng());
       if(status === google.maps.GeocoderStatus.OK) {
         context.map.setCenter(results[0].geometry.location);
         context.marker.setPosition(results[0].geometry.location);
