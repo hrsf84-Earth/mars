@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Mapsearch from './mapsearch.jsx';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchLocationData } from '../actions/LocationAction';
+import { updateMovie1, updateMovie2} from '../actions/MovieAction';
+
+
 
 class Map extends React.Component {
   constructor(props) {
@@ -45,6 +51,15 @@ class Map extends React.Component {
     this.geocoder.geocode({'address': term}, function handleResults(results, status){
       // console.log('THE GEOCODER RESULTS', results, status);
       console.log(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+      var lat = results[0].geometry.location.lat();
+      var lng = results[0].geometry.location.lng();
+      this.props.fetchLocationData(lat, lng)
+
+      this.props.updateMovie1(this.props.primaryMovie.tmdbId, lat, lng);
+
+      this.props.updateMovie2(this.props.secondaryMovie.tmdbId, lat, lng);
+
+
       if(status === google.maps.GeocoderStatus.OK) {
         context.map.setCenter(results[0].geometry.location);
         context.marker.setPosition(results[0].geometry.location);
@@ -66,6 +81,10 @@ class Map extends React.Component {
     </div>
   )
   }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchLocationData, updateMovie1, updateMovie2 }, dispatch);
 }
 
 export default Map;

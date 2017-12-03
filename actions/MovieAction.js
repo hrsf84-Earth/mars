@@ -38,3 +38,21 @@ export function setGraphData (relative = false) {
     type : relative === false ? SET_GRAPH_TO_RELATIVE: SET_GRAPH_TO_ABSOLUTE
   }
 }
+
+export function updateMovie1(id, lat, lng) {
+  const request = axios.get(`/movie/${id}/${lat}/${lng}`);
+
+  return {
+    type: UPDATE_MOVIE1,
+    payload: request,
+  };
+}
+
+export function updateMovie2(id, lat, lng) {
+  const request = axios.get(`/movie/${id}/${lat}/${lng}`);
+
+  return {
+    type: UPDATE_MOVIE2,
+    payload: request,
+  };
+}

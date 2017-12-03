@@ -23,7 +23,7 @@ function Location(props) {
         secondaryMovie={props.secondaryMovie}
         secondaryEmotion={props.secondaryMovie.emotion}
       />
-      <Map />
+      <Map primaryMovie={props.primaryMovie} secondaryMovie={props.secondaryMovie}/>
     </Paper>
   );
 }
