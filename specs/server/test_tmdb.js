@@ -1,8 +1,8 @@
 const { expect } = require('chai');
 // const request = require('supertest');
-var { searchMoviesByName, fetchMovieById, fetchImagesById } = require('../../utils/tmdb.js');
-
+var { searchMoviesByName, fetchMovieById, fetchImageById } = require('../../utils/tmdb.js');
 var api_key = process.env.API_KEY || null;
+var id = 10195;
 
 describe ('test tmdb server functions', () =>{
   describe('searchMoviesByName', () => {
@@ -70,7 +70,38 @@ describe ('test tmdb server functions', () =>{
         done();
       })
     })
-    // { adult: false,
+
+    it ('return movie info should an object that contain a range of movie information', () =>{
+      var expected = [ 'adult',
+      'backdrop_path',
+      'belongs_to_collection',
+      'budget',
+      'genres',
+      'homepage',
+      'id',
+      'imdb_id',
+      'original_language',
+      'original_title',
+      'overview',
+      'popularity',
+      'poster_path',
+      'production_companies',
+      'production_countries',
+      'release_date',
+      'revenue',
+      'runtime',
+      'spoken_languages',
+      'status',
+      'tagline',
+      'title',
+      'video',
+      'vote_average',
+      'vote_count' ]
+      expect(data).to.be.a('object');
+      expect(Object.keys(data)).to.eql(expected);
+    })
+
+        // { adult: false,
     //   backdrop_path: '/LvmmDZxkTDqp0DX7mUo621ahdX.jpg',
     //   belongs_to_collection:
     //    { id: 131296,
@@ -103,50 +134,62 @@ describe ('test tmdb server functions', () =>{
     //   vote_average: 6.6,
     //   vote_count: 7211 }
 
-
-    it ('return movie info should an object that contain a range of movie information', () =>{
-      var expected = [ 'adult',
-      'backdrop_path',
-      'belongs_to_collection',
-      'budget',
-      'genres',
-      'homepage',
-      'id',
-      'imdb_id',
-      'original_language',
-      'original_title',
-      'overview',
-      'popularity',
-      'poster_path',
-      'production_companies',
-      'production_countries',
-      'release_date',
-      'revenue',
-      'runtime',
-      'spoken_languages',
-      'status',
-      'tagline',
-      'title',
-      'video',
-      'vote_average',
-      'vote_count' ]
-      expect(data).to.be.a('object');
-      expect(Object.keys(data)).to.eql(expected);
-      console.log(data)
+    it ('should expect incoming data to have required information in the correct format', () =>{
+      expect(data.title).to.be.a('string');
+      expect(data.release_date).to.be.a('string');
+      expect(data.id).to.be.a('number');
+      expect(data.imdb_id).to.be.a('string');
+      expect(data.budget).to.be.a('number');
+      expect(data.genres).to.be.a('array');
     })
   })
 
-  describe ('fetchImageById', () =>{
+  describe.only ('fetchImageById', (done) =>{
     var data;
     before (done => {
       fetchImageById(10195)
       .then(res => {
+
         data = res;
         done();
       })
+      .catch(err => {
+        done(err)
+      })
     })
-  })
-  it ('data', () =>{
-    console.log(data , data)
+
+    // data [ '/LvmmDZxkTDqp0DX7mUo621ahdX.jpg',
+    // '/siiHsWPaP2r8hqPiQsry61gCjGY.jpg',
+    // '/6UxFfo8K3vcihtUpX1ek2ucGeEZ.jpg',
+    // '/sHFhe9tZ9CR9udl6WwI1rcYrnMQ.jpg',
+    // '/7sIPOlNuFeskJdUo0wa1oiIzP90.jpg',
+    // '/3SDoquTjagne0jWzdxEu31KFLmw.jpg',
+    // '/eLVtKgcOEalUuDyj3Ca6UYrsmoZ.jpg',
+    // '/fapU8ef9SrZHU8MEgwukR4ZIdI4.jpg',
+    // '/9uUwS2nohMcT1f6CxXovYap23nE.jpg',
+    // '/AptT5s6HA8Fgkiuqz5hyUuABjDx.jpg',
+    // '/orjBjIpkJAx9Ki88L6PzqUEbYRZ.jpg',
+    // '/iWfu3NYWFLyYtj1ddUEsrg8jw7f.jpg',
+    // '/vEMTVCbGwkWg2s7OaUZw1re9dST.jpg',
+    // '/h8OcfaiTydrfMl0i5R1sB4Pcswu.jpg',
+    // '/9BN8zdB1gZejgOzkizqAzr5oeno.jpg',
+    // '/vXSeaYZ959Tt4uYMuVBdVzH735M.jpg',
+    // '/96A856tCyERcMgoJs5fUuXYXjPe.jpg',
+    // '/nxTwsHYotelqITsXuuI1oFUTbhM.jpg',
+    // '/gzIQ4iKzn6bI88PHLzSPaE2i2JG.jpg',
+    // '/6donuzAUv5xpuhi4Al2TZLKbuFU.jpg',
+    // '/jMizWmLxG3ud5pkMhtawFRe9VI1.jpg',
+    // '/dcrQoYl2mGxvpdp8RNdSuge5g2e.jpg',
+    // '/ajSdBkj8NOKJGFTM3NB8OyUyEMW.jpg' ]
+
+
+    it ('data returned should be an array', () =>{
+      expect(data).to.be.a('array');
+    })
+    it.only ('data array should contain image string', () =>{
+      expect(data[0]).to.be.a('string');
+      expect(data[0].slice(-4, -3)).to.equal('.');
+      expect(data[0].slice(-3,)).to.be.oneOf(['bmp', 'jpg', 'png', 'gif']);
+    })
   })
 })
