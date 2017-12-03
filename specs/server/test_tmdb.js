@@ -144,7 +144,7 @@ describe ('test tmdb server functions', () =>{
     })
   })
 
-  describe.only ('fetchImageById', (done) =>{
+  describe ('fetchImageById', (done) =>{
     var data;
     before (done => {
       fetchImageById(10195)
@@ -186,7 +186,7 @@ describe ('test tmdb server functions', () =>{
     it ('data returned should be an array', () =>{
       expect(data).to.be.a('array');
     })
-    it.only ('data array should contain image string', () =>{
+    it ('data array should contain image string', () =>{
       expect(data[0]).to.be.a('string');
       expect(data[0].slice(-4, -3)).to.equal('.');
       expect(data[0].slice(-3,)).to.be.oneOf(['bmp', 'jpg', 'png', 'gif']);
