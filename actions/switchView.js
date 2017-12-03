@@ -6,7 +6,6 @@ export const LOCATIONSENTIMENT ='LOCATIONSENTIMENT';
 
 
 export function graphAbsolute () {
-  console.log('graphAbsolute')
   return {
     type: GRAPHABSOLUTE,
     view: 'graphAbsolute'
@@ -14,7 +13,6 @@ export function graphAbsolute () {
 }
 
 export function graphRelative () {
-  console.log('graphRelative')
   return {
     type: GRAPHRELATIVE,
     view: 'graphRelative'
@@ -22,7 +20,6 @@ export function graphRelative () {
 }
 
 export function movieDetails () {
-  console.log('movieDetails')
   return {
     type: MOVIEDETAILS,
     view: 'movieDetails'
@@ -30,7 +27,6 @@ export function movieDetails () {
 }
 
 export function map () {
-  console.log('map')
   return {
     type: MAP,
     view: 'map'
@@ -38,7 +34,6 @@ export function map () {
 }
 
 export function locationSentiment () {
-  console.log('locationSentiment')
   return {
     type: LOCATIONSENTIMENT,
     view: 'locationSentiment'

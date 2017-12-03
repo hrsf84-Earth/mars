@@ -9,3 +9,21 @@ body {
 .recharts-wrapper {
   margin: 0 auto;
 }
+
+.movie-search-container {
+  display: flex;
+  justify-content: space-around
+}
+
+.movie-search-box {
+  padding: 5px;
+}
+
+.search-Box {
+  padding-bottom: 25px;
+}
+
+.search-Bar {
+  margin: auto;
+  /* text-align: center; */
+}
