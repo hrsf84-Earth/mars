@@ -22,7 +22,7 @@ class SearchBox extends Component {
     };
 
     this.style = {
-      padding: '25px',
+      padding: '0px',
     };
 
     this.imgUrl = 'https://image.tmdb.org/t/p/w92';
@@ -67,38 +67,50 @@ class SearchBox extends Component {
     const hasSecondaryMovieList = this.state.secondaryMovieList.length > 0;
     const { primaryMovie, secondaryMovie, walmartProduct } = this.props;
     return (
-      <Paper zDepth={2} style={this.style}>
-        <SearchBar
-          onMovieSearch={this.onMovieSearch}
-          floatingLabelText="Search Primary Movie"
-          type="primary"
-        />
+      <Paper zDepth={2} className="search-Box">
+        <div className="movie-search-container">
+          <div className="movie-search-box">
+            <SearchBar
+              className="search-bar"
+              // style={{textAlign: center}}
+              onMovieSearch={this.onMovieSearch}
+              floatingLabelText="Search Primary Movie"
+              type="primary"
+            />
+
+            {!hasPrimaryMovieList && primaryMovie.title &&
+            <Chip style={{ margin: 'auto' }} backgroundColor={this.chipColor}>
+              <Avatar src={this.imgUrl + primaryMovie.images[0]} />
+              {primaryMovie.title}
+            </Chip>}
+          </div>
+
+          {primaryMovie.title &&
+            <div className="movie-search-box">
+              <SearchBar
+                onMovieSearch={this.onMovieSearch}
+                floatingLabelText="Search Secondary Movie"
+                type="secondary"
+              />
+
+              {!hasSecondaryMovieList && secondaryMovie.title &&
+              <Chip style={{ margin: 'auto' }} backgroundColor={this.chipColor}>
+                <Avatar src={this.imgUrl + secondaryMovie.images[0]} />
+                {secondaryMovie.title}
+              </Chip>}
+            </div>
+          }
+        </div>
         {hasPrimaryMovieList &&
-        <MovieList
-          movies={this.state.primaryMovieList}
-          fetchMovie={this.fetchPrimaryMovie}
-        />}
-        {!hasPrimaryMovieList && primaryMovie.title &&
-        <Chip style={{ margin: 'auto' }} backgroundColor={this.chipColor}>
-          <Avatar src={this.imgUrl + primaryMovie.images[0]} />
-          {primaryMovie.title}
-        </Chip>}
-        {primaryMovie.title &&
-        <SearchBar
-          onMovieSearch={this.onMovieSearch}
-          floatingLabelText="Search Secondary Movie"
-          type="secondary"
-        />}
+          <MovieList
+            movies={this.state.primaryMovieList}
+            fetchMovie={this.fetchPrimaryMovie}
+          />}
         {hasSecondaryMovieList &&
-        <MovieList
-          movies={this.state.secondaryMovieList}
-          fetchMovie={this.fetchSecondaryMovie}
-        />}
-        {!hasSecondaryMovieList && secondaryMovie.title &&
-        <Chip style={{ margin: 'auto' }} backgroundColor={this.chipColor}>
-          <Avatar src={this.imgUrl + secondaryMovie.images[0]} />
-          {secondaryMovie.title}
-        </Chip>}
+          <MovieList
+            movies={this.state.secondaryMovieList}
+            fetchMovie={this.fetchSecondaryMovie}
+          />}
       </Paper>
     );
   }

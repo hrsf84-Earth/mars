@@ -23,7 +23,7 @@ const getEmotions = function (text, twitterSearchTerm) {
     },
   )
     .catch((err) => {
-      console.log(`error from watson API:  ${err}`);
+      // console.log(`error from watson API:  ${err}`);
     }).then(Promise.resolve(false));
 };
 
@@ -47,7 +47,7 @@ module.exports.avgLocationEmotion = function (twitterSearchTerm, lat, long) {
     .then((texts) => {
       const emotions = [];
       texts.forEach(text => emotions.push(getEmotions(text)));
-      console.log('SENDING TEXTS TO WATSON');
+      // console.log('SENDING TEXTS TO WATSON');
       return Promise.all(emotions);
     })
     .then((emotions) => {

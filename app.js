@@ -28,7 +28,6 @@ app.get('/search/:movie', (req, res) => {
 
 app.get('/movie/:tmdbId', async (req, res) => {
   const { tmdbId } = req.params;
-
   try {
     const movie = await Movie.findOne({ tmdbId });
     /// this is looking for the movie in the database, if it finds it, it then
@@ -78,7 +77,7 @@ app.get('/movie/:tmdbId', async (req, res) => {
     results.emotion = emotion;
     return res.send(results);
   } catch (err) {
-    console.log('response Error', err)
+    // console.log('response Error', err)
     return res.status(400).send(err);
   }
 });
@@ -92,7 +91,7 @@ app.get('/movie/:tmdbId/:lat/:long', async (req, res) => {
     const movie = await Movie.findOne({ tmdbId });
     if (movie) {
       const emotion = await avgLocationEmotion(movie.title, lat, long);
-      console.log(emotion);
+      // console.log(emotion);
 
       const results = movie.toObject();
 
@@ -100,9 +99,10 @@ app.get('/movie/:tmdbId/:lat/:long', async (req, res) => {
       return res.send(results);
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(400).send(err);
   }
 });
 
 module.exports = app.listen(port, () => console.log(`Listening on port ${port}`));
+

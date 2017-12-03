@@ -11,11 +11,7 @@ export default function (state = {}, action ) {
       break;
     }
     case 'MOVIEDETAILS': {
-      return {mainView: 'movieDetails'}
-      break;
-    }
-    case 'MOVIEDETAILS': {
-      return {mainView: 'movieDetails'}
+      return 'movieDetails'
       break;
     }
     case 'MAP': {
@@ -23,7 +19,7 @@ export default function (state = {}, action ) {
       break;
     }
     case 'LOCATIONSENTIMENT': {
-      return {mainView: 'locationSentiment'}
+      return 'locationSentiment'
       break;
     }
     default: {

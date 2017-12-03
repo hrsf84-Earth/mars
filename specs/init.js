@@ -1,7 +1,9 @@
 const { expect } = require('chai');
 const request = require('supertest');
 const primaryData = require('../components/_primaryTestData.js');
-const server = require('../app.js');
+var server = require('../app.js');
+
+var dmdbKey = process.env.API_KEY || null;
 
 describe('Init', () => {
   it('should have 1 to equal 1', () => {
@@ -97,38 +99,10 @@ describe('Init', () => {
     expect(data.longitudinal_data.length).to.equal(9);
   });
 
-  xit('should have a setGraphingObject which has been called', () => {
+  it('should have a setGraphingObject which has been called', () => {
     console.log('setGraphingObject test has been called');
   });
 });
 
-describe('loading routes', () => {
-  // let server;
-  beforeEach(() => {
-    // server = require('../app.js');
-  });
-  afterEach(function(){
-    // server.close();
-  });
-  it('responds to get', (done) => {
-    request(server)
-      .get('/')
-      .expect(200, done);
-  });
-  // the below test requires a valid API key!!!!!
-  xit('responds to search by tmdbId', (done) => {
-    request(server)
-      .get('/movie/315635')
-      .expect(200, done);
-  });
-  it('responds to searchmovie', (done) => {
-    request(server)
-      .get('/search/:movie')
-      .expect(200, done);
-  });
-  it('should throw an error for a bad request', (done) => {
-    request(server)
-      .get('/movie/:tmdbId')
-      .expect(400, done);
-  });
-});
+
+
