@@ -9,8 +9,8 @@ import { updateMovie1, updateMovie2} from '../actions/MovieAction';
 
 
 class Map extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.onSearch = this.onSearch.bind(this);
 
   }
@@ -50,16 +50,19 @@ class Map extends React.Component {
     var context = this;
     this.geocoder.geocode({'address': term}, function handleResults(results, status){
       // console.log('THE GEOCODER RESULTS', results, status);
-      console.log(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+      console.log('LAT', results[0].geometry.location.lat(), 'LNG', results[0].geometry.location.lng());
       var lat = results[0].geometry.location.lat();
       var lng = results[0].geometry.location.lng();
-      this.props.fetchLocationData(lat, lng)
 
-      this.props.updateMovie1(this.props.primaryMovie.tmdbId, lat, lng);
+      console.log('THE PROPS', context.props);
 
-      this.props.updateMovie2(this.props.secondaryMovie.tmdbId, lat, lng);
+      context.props.fetchLocationData(lat, lng)
 
+      context.props.updateMovie1(context.props.primaryMovie.tmdbId, lat, lng);
 
+      context.props.updateMovie2(context.props.secondaryMovie.tmdbId, lat, lng);
+
+      console.log('THE PROPS AFTER', context.props);
       if(status === google.maps.GeocoderStatus.OK) {
         context.map.setCenter(results[0].geometry.location);
         context.marker.setPosition(results[0].geometry.location);
@@ -83,8 +86,13 @@ class Map extends React.Component {
   }
 }
 
+function mapStateToProps({ locationData }) {
+  return { locationData };
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchLocationData, updateMovie1, updateMovie2 }, dispatch);
 }
 
-export default Map;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map);
