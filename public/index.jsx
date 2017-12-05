@@ -8,7 +8,9 @@ import App from '../components/App';
 import reducers from '../reducers';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
-const Store = createStoreWithMiddleware(reducers, {mainView: 'graphAbsolute'})
+const Store = createStoreWithMiddleware(reducers, {mainView: 'graphAbsolute',
+locationData: {latitude: 40.7127753, longitude:-74.0059728}
+})
 ReactDOM.render(
   <MuiThemeProvider>
     <Provider store={Store}>

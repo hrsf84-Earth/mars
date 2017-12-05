@@ -16,14 +16,14 @@ function Location(props) {
     <Paper zDepth={1} style={style}>
      <LocationSentiment
         // passing latitue and longitude for potential feature for displaying location on the final rendered graph
-        latitude={props.latitude}
-        longitude={props.longitude}
+        latitude={props.locationData.latitude}
+        longitude={props.locationData.longitude}
         primaryMovie={props.primaryMovie}
         primaryEmotion={props.primaryMovie.emotion}
         secondaryMovie={props.secondaryMovie}
         secondaryEmotion={props.secondaryMovie.emotion}
       />
-      <Map />
+      <Map primaryMovie={props.primaryMovie} secondaryMovie={props.secondaryMovie}/>
     </Paper>
   );
 }
@@ -39,8 +39,8 @@ Location.propTypes = {
   })
 };
 
-function mapSentimentToProps({ latitude, longitude, primaryMovie, primaryEmotion, secondaryMovie, secondaryEmotion }) {
-  return { latitude, longitude, primaryMovie, primaryEmotion, secondaryMovie, secondaryEmotion };
+function mapSentimentToProps({ latitude, longitude, primaryMovie, primaryEmotion, secondaryMovie, secondaryEmotion, locationData }) {
+  return { latitude, longitude, primaryMovie, primaryEmotion, secondaryMovie, secondaryEmotion, locationData };
 }
 
 export default connect(mapSentimentToProps)(Location);

@@ -2,6 +2,8 @@ import axios from 'axios';
 
 export const FETCH_MOVIE1 = 'FETCH_MOVIE1';
 export const FETCH_MOVIE2 = 'FETCH_MOVIE2';
+export const UPDATE_MOVIE1 = 'UPDATE_MOVIE1';
+export const UPDATE_MOVIE2 = 'UPDATE_MOVIE2';
 export const FETCH_PRODUCTS ='FETCH_PRODUCTS';
 export const SET_GRAPH_TO_ABSOLUTE ='SET_GRAPH_TO_ABSOLUTE';
 export const SET_GRAPH_TO_RELATIVE ='SET_GRAPH_TO_RELATIVE';
@@ -37,4 +39,22 @@ export function setGraphData (relative = false) {
   return {
     type : relative === false ? SET_GRAPH_TO_RELATIVE: SET_GRAPH_TO_ABSOLUTE
   }
+}
+
+export function updateMovie1(id, lat, lng) {
+  const request = axios.get(`/movie/${id}/${lat}/${lng}`);
+
+  return {
+    type: UPDATE_MOVIE1,
+    payload: request,
+  };
+}
+
+export function updateMovie2(id, lat, lng) {
+  const request = axios.get(`/movie/${id}/${lat}/${lng}`);
+
+  return {
+    type: UPDATE_MOVIE2,
+    payload: request,
+  };
 }
